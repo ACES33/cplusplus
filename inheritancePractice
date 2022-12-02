@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee
+{
+  private:
+    string name;
+    string eid;
+    int wage;
+
+  public:
+  
+  //parameterized constructor
+  Employee (string name="Sam Pell", string eid = "0", int wage = 0)
+  {
+      cout << "this is the Employee Constructor from the base class" << endl;
+      
+      this->name = name;
+      this->eid = eid;
+      this->wage = wage;
+  }
+  
+  //setters
+  void setName(string name)
+  {
+      this->name = name;
+  }
+  
+  void setEid (string eid)
+  {
+      this->eid = eid;
+  }
+  
+    void setWage (int wage)
+    {
+        this -> wage = wage;
+    }
+    
+   // getters
+   string getName() {return name;}      
+   string getEid() {return eid;}
+   int getWage(){return wage;}
+};
+
+class FTEmployee : public Employee
+{
+   public:
+   FTEmployee()
+    {
+        cout <<"I'm a full time employee" << endl;   
+    }
+};
+
+
+class PTEmployee : public Employee
+{
+    public:
+    int hourly;
+    int time;
+    
+    PTEmployee(int hourly, int time)
+    {    cout << "this is the PTEmployee class derived from Employee" << endl;
+        this->hourly = hourly;
+        this->time = time;
+    }
+    
+    void setHourly(int hourly)
+    {
+        this->hourly = hourly;
+    }
+   void setTime(int time)
+    {
+        this->time = time;
+    }
+    
+    int getHourly() { return hourly;}
+    int getTime() {return time;}
+    int getPay() {return time*hourly;}
+};
+
+int
+main()
+{
+    Employee e;
+    e.setName("James");
+    cout << e.getName() << endl;
+    cout << e.getWage() << endl;
+    e.setEid("123");
+    cout <<e.getEid() << endl;
+    FTEmployee ft;
+    cout <<    ft.getEid();
+    cout << ft.getName();
+    PTEmployee pt(12,10);
+    cout <<     pt.getPay() << endl;
+    
+    return 0;
+}
