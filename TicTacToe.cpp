@@ -27,17 +27,22 @@ bool isWinner(char turn, char board[])
 	else
 		return false;
 }
+bool isSpaceFree(int position, char board[])
+{
+	if (board[position] == '\0')
+		return true;
+	else
+		return false;
+}
 
 bool isFull(char board[])
 {
-	for (int i = 1; i <= 9; i++)
-	{
-		if (!(board[i]))
+		if (isSpaceFree)
 			return false;
 		else
 			return true;
-	}
 }
+
 
 //void replay()
 //{
@@ -62,22 +67,34 @@ bool isFull(char board[])
 //	else
 //		return false;
 //}
-void main()
+int main()
 {
 	char test[10] = { '#', ' ','O', '#', '#','X','#','X','O','#' };
 	// displayBoard(board);
 	bool gameOn = true;
-	char turn = 'X';
-	int position;
-	char board[10] = {};
+
 	while (gameOn)
 	{
+		char turn = 'X';
+		int position;
+		char board[10] = "";
+
 		displayBoard(board);
 		if (turn == 'X')
 		{
 			cout << "X, where do you want to play? 1-9" << endl;
 			cin >> position;
-			board[position] = 'X';
+			if (isSpaceFree(position, board))
+			{
+				board[position] = 'X';
+			}
+			else
+			{
+				cout << "Cannot play there" << endl;
+				cin >> position;
+
+			}
+
 			//if (isSpaceEmpty(position, board))
 			//{
 			//	board[position] = 'X';
@@ -91,6 +108,7 @@ void main()
 				displayBoard(board);
 				cout << "Congrats X!  You've won!" << endl;
 				gameOn = false;
+				//replay();
 			}
 			else
 			{
@@ -100,7 +118,11 @@ void main()
 					cout << "Draw!";
 					break;
 				}
-				turn = 'O';
+				else 
+				{
+					turn = 'O';
+				}
+				//turn = 'O';
 			}
 			if (turn == 'O')
 			{
@@ -113,6 +135,7 @@ void main()
 					displayBoard(board);
 					cout << "Congrats O!  You've won!" << endl;
 					gameOn = false;
+					//replay();
 				}
 				else
 				{
@@ -122,7 +145,11 @@ void main()
 						cout << "Draw!";
 						break;
 					}
-					turn = 'X';
+					else
+					{
+						turn = 'X';
+					}
+					
 				}
 			}
 		}
@@ -137,6 +164,7 @@ void main()
 		if (decision == 'y' || decision == 'Y')
 		{
 			gameOn = true;
+			board[10] = ""; // i can't do this. i need to reset to a new clean board.
 		}
 		else
 		{
@@ -145,4 +173,5 @@ void main()
 	}
 
 
+	return 0;
 }
